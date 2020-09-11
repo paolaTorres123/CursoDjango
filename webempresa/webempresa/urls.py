@@ -19,7 +19,13 @@ from core import views
 from django.conf import settings
 
 urlpatterns = [
+    #Paths de core
     path('core/', include('core.urls')),
+    #Paths para services
+    path('services/',include('services.urls')),
+    #Paths para blogs
+    path('blog/',include('blog.urls')),
+    #Paths para admin
     path('admin/', admin.site.urls),
 ]
 

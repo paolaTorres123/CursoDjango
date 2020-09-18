@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    {% for flavor in flavors %}
+    <section class="page-section">
+        <div class="container">
+          <div class="product-item">
+            <div class="product-item-title d-flex">
+              <div class="bg-faded p-5 d-flex mr-auto rounded">
+                <h2 class="section-heading mb-0">{{flavor.title}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endfor %}
+{% endblock %}

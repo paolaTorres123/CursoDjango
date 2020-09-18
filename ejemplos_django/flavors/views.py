@@ -4,6 +4,11 @@ from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
+from django.views.generic import CreateView
+
+
 # Create your views here.
 def flavor(request):
     flavors = Flavor.objects.all()
@@ -21,3 +26,25 @@ def posicion_flavor_status(request,pk,status):
         flavor.save()
         return HttpResponse('Horario')
     return HttpResponse('Sadness',status_code=400)
+
+
+class FlavorDetailView(LoginRequiredMixin, DetailView):
+    model = Flavor
+
+class FlavorCreateView(LoginRequiredMixin,CreateView):
+    model = Flavor
+    fields = ['title','slug','scoops_remaining']
+
+    def form_valid(self, form):
+        return super(FlavorCreateView,self).form_valid(form)
+
+
+class FlavorUpdateView(LoginRequiredMixin, FavoriteMixin, UpdateView):
+    model = Flavor
+    fields = ['title', 'slug', 'scoops_remaining']
+    def form_valid(self, form):
+        update_user_who_favorited(
+            instance=self.object,
+            favorites=self.likes_and_favorites['favorites']
+        )
+        return super(FlavorUpdateView, self).form_valid(form)

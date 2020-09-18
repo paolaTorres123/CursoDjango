@@ -1,5 +1,7 @@
 from django.db import models
 from core.models import TimeStampedModel
+from core.models import TastyTitleAbstractModel
+from django.urls import reverse
 # Create your models here.
 
 class Flavor(TimeStampedModel):
@@ -15,6 +17,6 @@ class Flavor(TimeStampedModel):
     slug = models.SlugField(unique=True)
     scoops_remaining = models.IntegerField(choices=STATUS_CHOICES,
         default=STATUS_0)
-        
+
     def get_absolute_url(self):
         return reverse("flavors:detail", kwargs={"slug": self.slug})

@@ -9,11 +9,9 @@ class Flavor(TimeStampedModel):
     STATUS_1 = 1
     STATUS_CHOICES=(
         (STATUS_0, 'zero'),
-        (STATUS_1 = 'one'),
+        (STATUS_1,  'one'),
     )
     title = models.CharField(max_length=200,verbose_name="Titulo")
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
     scoops_remaining = models.IntegerField(choices=STATUS_CHOICES,
         default=STATUS_0)

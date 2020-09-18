@@ -20,5 +20,5 @@ from flavors import views as flavors_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('flavors/',include('flavors.urls')),
+    #path('flavors/',include('flavors.urls')),
 ]

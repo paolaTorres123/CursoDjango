@@ -11,5 +11,10 @@ class TastyTitleAbstractModel(models.Model):
     title = models.CharField(max_length=255, validators=[validate_tasty])
 
 
+class ModelFormFailureHistory(models.Model):
+    form_data = models.TextField()
+    model_data = models.TextField()
+
+
     class Meta:
         abstract = True

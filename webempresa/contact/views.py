@@ -13,23 +13,20 @@ def contact(request):
             name = request.POST.get('name', '')
             email = request.POST.get('email', '')
             content = request.POST.get('content', '')
-
-            # Creamos el correo
+            #Enviamos el correo y redireccionamos
             email = EmailMessage(
-                "La Caffettiera: Nuevo mensaje de contacto",
-                "De {} <{}>\n\nEscribió:\n\n{}".format(name, email, content),
+                "La cafetera: Nuevo mensaje de contacto",
+                "De {} <{}>\n\n Escribio:\n\n {}".format(name,email,contact),
                 "no-contestar@inbox.mailtrap.io",
-                ["django@hektorprofe.net"],
+                ["pao.paotorres18@gmail.com"],
                 reply_to=[email]
             )
-
-            # Lo enviamos y redireccionamos
             try:
                 email.send()
-                # Todo ha ido bien, redireccionamos a OK
+                #Algo ha ido bien, redireccionamos
                 return redirect(reverse('contact')+"?ok")
             except:
-                # Algo no ha ido bien, redireccionamos a FAIL
+                #Algo no ha ido bien
                 return redirect(reverse('contact')+"?fail")
     
     return render(request, "contact/contact.html",{'form':contact_form})

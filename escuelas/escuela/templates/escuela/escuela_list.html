@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block titulo %}
+   Escuelas
+{% endblock titulo %}
+    
+
+{% block contenido %}   
+<div>
+    <h1 style="text-align: center;padding: 50px;">Escuelas</h1>
+    <div style="padding: 50px;">
+        <table style="width: 100%; border: 3px solid #000;">
+            <thead style="color: cadetblue;width: 25%;">
+                <th>Centro Educativo</th>
+                <th>Turno</th>
+                <th>Ambito</th>
+                <th>Control</th>
+            </thead>
+            <tbody >
+                {% for escuela in object_list %}
+                    <tr>
+                        <td style="text-align: center;vertical-align: top;border: 1px solid #000;
+                        ">{{escuela.centro_educativo}}</td>
+                        <td style="text-align: center;vertical-align: top;border: 1px solid #000;
+                        ">{{escuela.turno_escuela}}</td>
+                        <td style="text-align: center;vertical-align: top;border: 1px solid #000;
+                        ">{{escuela.ambito_escuela}}</td>
+                        <td style="text-align: center;vertical-align: top;border: 1px solid #000;
+                        ">{{escuela.control_escuela}}</td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="filtro/" method="POST", style="padding: 25px;">
+            Centro Educativo: 
+            <input type="text" name="centro_educativo" value="{{centro_educativo}}" style="width:25%" / >
+            <input type="submit" value="Filtrar">
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+
+
+
+
+
+{% endblock contenido %}
